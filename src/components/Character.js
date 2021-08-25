@@ -11,7 +11,12 @@ class Characters extends React.Component {
           if (this.props.characters === [])
             return <div className="h2">No Characters to show</div>;
           return (
-            <Card key={character.id}>
+            <Card
+              color={this.props.favoriteIndex.find(
+                (element) => character.id === +element
+              )}
+              key={character.id}
+            >
               <img
                 className="mt-3 mx-auto d-block"
                 alt="character Img"
@@ -27,13 +32,15 @@ class Characters extends React.Component {
                 {character.title}
               </div>
               <div className="d-flex justify-content-center p-3">
-                <button
-                  id={character.id}
-                  onClick={this.props.handleFavorite}
-                  className="btn btn-primary"
-                >
-                  Mark Favorite
-                </button>
+                {this.props.activeTab === "character" && (
+                  <button
+                    id={character.id}
+                    onClick={this.props.handleFavorite}
+                    className="btn btn-primary"
+                  >
+                    Mark Favorite
+                  </button>
+                )}
               </div>
             </Card>
           );

@@ -7,9 +7,10 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      activeTab: "",
+      activeTab: "character",
       characters: [],
       favorites: [],
+      favoriteIndex: [-1],
       continents: [],
     };
   }
@@ -31,11 +32,14 @@ class App extends React.Component {
         (character) => character.id === +e.target.id
       ),
     ];
-
     this.setState({ favorites: favorites });
+    this.setState({
+      favoriteIndex: [...this.state.favoriteIndex, +e.target.id],
+    });
   }
   showFavorites() {
     this.setState({ activeTab: "favorites" });
+    console.log(this.state.favoriteIndex);
   }
 
   showAll() {
@@ -87,12 +91,16 @@ class App extends React.Component {
         </div>
         {this.state.activeTab === "character" && (
           <Characters
+            activeTab={this.state.activeTab}
+            favoriteIndex={this.state.favoriteIndex}
             handleFavorite={this.handleFavoriteClick.bind(this)}
             characters={this.state.characters}
           />
         )}
         {this.state.activeTab === "favorites" && (
           <Characters
+            activeTab={this.state.activeTab}
+            favoriteIndex={this.state.favoriteIndex}
             handleFavorite={this.handleFavoriteClick.bind(this)}
             characters={this.state.favorites}
           />

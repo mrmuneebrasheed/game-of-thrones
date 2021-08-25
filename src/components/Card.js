@@ -1,13 +1,20 @@
 import React from "react";
+import styled from "styled-components";
 class Card extends React.Component {
   render() {
+    const Div = styled.div`
+      color: ${this.props.color ? "red" : "white"};
+      background-color: ${this.props.color ? "red" : "blue"};
+      border: 1px solid black;
+      border-radius: ${this.props.color ? "20px" : "10px"};
+    `;
     return (
-      <div
+      <Div
+        className={`col-md-3 col-sm-5 m-2 flex-wrap overflow-auto ${this.props.className}`}
         style={{ maxHeight: "70%" }}
-        className={`bg-white border rounded  col-md-3 col-sm-5 m-2 ${this.props.className}`}
       >
         {this.props.children}
-      </div>
+      </Div>
     );
   }
 }
